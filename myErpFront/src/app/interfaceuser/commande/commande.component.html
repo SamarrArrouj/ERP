@@ -1,0 +1,163 @@
+
+
+  <div class="page-wrapper">
+    <div class="content container-fluid">
+       <div class="page-header">
+           <div class="row">
+                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                 <h5 class="text-uppercase mb-0 mt-0 page-title">Commande</h5>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+    <ul class="breadcrumb float-right p-0 mb-0">
+    <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+    <li class="breadcrumb-item"><a href="index.html">Commande</a></li>
+    <li class="breadcrumb-item"><span>Commande</span></li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    <div class="page-content">
+    <div class="card" style="height: 800px;">
+    <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-6" style="margin-left: 15%; ">
+    <div class="card">
+      <form>
+    <div class="card-body">
+    <div class="row">
+    <div class="col-lg-12 col-md-6 col-sm-6 col-12">
+    <div class="custom-mt-form" > <!-- [formGroup]="form" (ngSubmit)="submit()"-->
+    <div class="form-group">
+    <label>Ville</label>
+    <input type="text"  class="form-control" name="ville" placeholder="ville"  [(ngModel)]="commande.ville">
+    <div class="alert alert-danger mt-2"
+    role="alert"
+    *ngIf="!commande.ville&& (isNomTouched || isSubmitted)"
+  >
+    ville est obligatoire!
+  </div>
+    <!-- <div class="alert alert-danger" *ngIf=" form.get('ville')?.invalid && (form.get('date')?.dirty || form.get('date')?.touched || f.submitted )" >
+      <div *ngIf=" form.get('ville')?.errors?.['required']">La Date est obligatoire.</div>
+    </div> -->
+    </div>
+
+    <div class="form-group">
+    <label>Adresse de livraison</label>
+    <input type="text"  class="form-control" name="adresse" [(ngModel)]="commande.adresse" placeholder="adresse de livraison">
+    <!-- <div class="text-muted" *ngIf=" form.get('date')?.invalid && (form.get('date')?.dirty || form.get('date')?.touched || f.submitted )" >
+      <div *ngIf=" form.get('date')?.errors?.['required']">La Date est obligatoire.</div>
+    </div> -->
+    <div class="alert alert-danger mt-2"
+    role="alert"
+    *ngIf="!commande.adresse&& (isNomTouched || isSubmitted)">
+    Adresse de livraison est obligatoire!
+  </div>
+    </div>
+         <div class="form-group">
+          <label>Numero</label>
+          <input type="text" placeholder="numero" name="numero" [(ngModel)]="commande.numero" class="form-control">
+          <div class="alert alert-danger mt-2"
+          role="alert"
+          *ngIf="!commande.numero&& (isNomTouched || isSubmitted)">
+          Numero est obligatoire!
+        </div>
+          <!-- <div class="text-muted" *ngIf=" form.get('consommation')?.invalid && (form.get('consommation')?.dirty || form.get('consommation')?.touched || f.submitted )" >
+      <div *ngIf="form.get('consommation')?.errors?.['required']">Sélectionnez la consommation</div>
+    </div> -->
+  </div>
+
+    <div class="form-group text-right custom-mt-form-group">
+      <button class="btn btn-success mr-2" (click)="save()" type="submit">valider commande</button>
+      <!-- <button class="btn btn-secondary" (click)="reset()" type="reset">Vider</button> -->
+      </div>
+
+    </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+    <div class="custom-mt-form">
+    <!-- <div class="form-group">
+    <label>Ancienne valeur</label>
+    <input type="number" class="form-control" formControlName="ancienne_valeur">
+    </div>
+    <div class="form-group">
+    <label> Nouvelle valeur</label>
+    <input type="number" class="form-control" formControlName="nouvelle_valeur">
+    </div> -->
+
+
+    </div>
+    </div>
+
+    </div>
+    </div>
+  </form>
+    </div>
+    </div>
+
+    <div class="col-md-3" style="margin-top: 2px; width: 80px; height: 200px;">
+      <div class="card" style="height: 200px; width: 300px">
+        <div class="ibox">
+          <div class="ibox-title">
+              <h5>Cart Summary</h5>
+          </div>
+          <div class="ibox-content">
+              <span>
+                  Total
+              </span>
+              <h2 class="font-bold">
+              {{somme}} DT
+              </h2>
+
+              <hr>
+              <span class="text-muted small">
+              </span>
+              <div class="m-t-sm">
+                  <div class="btn-group">
+                  <a href="#" class="btn btn-success btn-sm mr-2"
+                  routerLink="../produits"><i class="fa fa-shopping-cart"></i> shopping</a>
+                  <a routerLink="../panier" class="btn btn-white btn-sm"> Cancel</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+    <!-- <div class="col-lg-3" style="margin-top: 40px; margin-left: 50px;">
+      <div class="card position-sticky top-0">
+        <div class="p-3 bg-light bg-opacity-10">
+          <h6 class="card-title mb-3">Order Summary</h6>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Subtotal</span> <span>$214.50</span>
+          </div>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Shipping</span> <span>$20.00</span>
+          </div>
+          <div class="d-flex justify-content-between mb-1 small">
+            <span>Coupon (Code: NEWYEAR)</span> <span class="text-danger">-$10.00</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between mb-4 small">
+            <span>TOTAL</span> <strong class="text-dark">$224.50</strong>
+          </div>
+          <div class="form-check mb-1 small">
+            <input class="form-check-input" type="checkbox" value="" id="tnc">
+            <label class="form-check-label" for="tnc">
+              I agree to the <a href="#">terms and conditions</a>
+            </label>
+          </div>
+          <div class="form-check mb-3 small">
+            <input class="form-check-input" type="checkbox" value="" id="subscribe">
+            <label class="form-check-label" for="subscribe">
+              Get emails about product updates and events. If you change your mind, you can unsubscribe at any time. <a href="#">Privacy Policy</a>
+            </label>
+          </div>
+          <button class="btn btn-primary w-100 mt-2">Place order</button>
+        </div>
+      </div>
+    </div> -->
+    </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+

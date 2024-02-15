@@ -1,0 +1,216 @@
+
+<div class="main-wrapper" >
+  <div class="account-page">
+  <div class="container">
+  <h3 class="account-title text-white">Login</h3>
+  <div class="account-box">
+  <div class="account-wrapper">
+  <!-- <div class="account-logo">
+  <a href="javascript:void()"><img src="assets/img/logo.png" alt="SchoolAdmin"></a>
+  </div> -->
+  <a href="javascript:void(0)" class="logo mb-3" style="margin-left: 15%;">
+    <!-- <img src="assets/img/logo1.png" width="20px" height="20px" alt="" class="mb-2 ml-4"> -->
+    <span class="text-uppercase" style="font-size: large; margin-left: 80px;"
+    ><strong>Login</strong></span>
+    </a>
+  <form  *ngIf="!isLoggedIn"
+  name="form"
+  (ngSubmit)="f.form.valid && onSubmit(f)"
+  #f="ngForm"
+  novalidate>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      name="username"
+      placeholder="username"
+    ngModel
+      required
+      #username="ngModel"
+    />
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="username.errors && f.submitted"
+    >
+      Username is required!
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="password"
+      ngModel
+      required
+      minlength="6"
+      #password="ngModel"
+    />
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="password.errors && f.submitted"
+    >
+      <div *ngIf="password.errors['required']">Password is required</div>
+      <div *ngIf="password.errors['minlength']">
+        Password must be at least 6 characters
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success btn-block">
+      Login
+    </button>
+  </div>
+  <a style="margin-left: 280px; color: currentColor;"  class="mt-2" href="../register">Register</a>
+  <div class="form-group">
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="f.submitted && isLoginFailed">
+      Login failed: {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="row">
+  <!-- <div class="text-left" style="margin-right: 25%;">
+  <a href="forgot-password.html">Forgot your password?</a>
+  </div> -->
+  <!-- <div class="text-right">
+  <a href="javascript:void()" routerLink="/register">create account</a>
+  </div> -->
+  </div>
+  </form>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+  <!-- <button class="btn btn-primary" type="button" disabled style="margin-left: 23%;">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    <span class="sr-only">Loading...</span>
+  </button> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="https://www.pngall.com/wp-content/uploads/5/Profile-Female-PNG.png"
+      class="profile-img-card"
+    />
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit(f)"
+      #f="ngForm"
+      novalidate>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+        ngModel
+          required
+          #username="ngModel"
+        />
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="username.errors && f.submitted"
+        >
+          Username is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          ngModel
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="password.errors && f.submitted"
+        >
+          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Login
+        </button>
+      </div>
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed"
+        >
+          Login failed: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Logged in as {{ roles }}.
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+
+      <div class="form-check mb-0">
+        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+        <label class="form-check-label" for="form2Example3">
+          Remember me
+        </label>
+      </div>
+      <a href="#!" class="text-body">Forgot password?</a>
+    </div>
+
+    <div class="text-center text-lg-start mt-4 pt-2" *ngIf="!isLoggedIn">
+      <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register"
+          class="link-danger">Register</a></p>
+    </div>
+  </div>
+</div> -->

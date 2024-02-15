@@ -1,0 +1,9 @@
+.modal {
+  display: none;
+  visibility: hidden;
+}
+
+.modal.show {
+  display: block;
+  visibility: visible;
+}

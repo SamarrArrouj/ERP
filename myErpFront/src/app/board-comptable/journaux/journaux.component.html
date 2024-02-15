@@ -1,0 +1,144 @@
+
+
+<div class="main-wrapper">
+<div class="page-wrapper">
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+    <h5 class="text-uppercase mb-0 mt-0 page-title">Liste des journaux</h5>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+    <ul class="breadcrumb float-right p-0 mb-0">
+    <li class="breadcrumb-item"><a href="javascript:void()"><i class="fas fa-home"></i> Accueil</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void()">Journaux</a></li>
+    <li class="breadcrumb-item"><span>Liste des journaux</span></li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 col-4">
+      </div>
+      <div class="col-sm-7 col-8 text-right add-btn-col" >
+      <a href="javascript:void()" routerLink="../add-journaux"
+      class="btn btn-success btn-rounded">
+        <i class="fas fa-plus"></i> Ajouter Journaux</a>
+      </div>
+    </div>
+<div class="card">
+<div class="card-header">
+<h4 class="page-title">Liste journaux</h4>
+</div>
+<div class="card-body">
+<div class="email-header mb-3">
+ <div class="row">
+<div class="col-sm-9 col-md-8 col-8 top-action-left">
+<div class="float-left mr-2 form-focus col-5 ">
+  <select class="custom-select custom-select-lg" [(ngModel)]="val">
+    <option selected></option>
+    <option *ngFor="let p of journaux" [value]="p.dateCreation">
+      {{p.dateCreation |date:'dd:MM:yyyy HH:mm'}}</option>
+
+  </select>
+  <label  class="focus-label mt-2 ml-2">choisir Date</label>
+<!-- <div class="btn-group dropdown-action" style="width:100px">
+<button type="button" class="btn btn-white dropdown-toggle"
+ data-toggle="dropdown">Date <i class="fas fa-angle-down ml-4"></i></button>
+<div class="dropdown-menu" id="dropdown">
+<a class="dropdown-item" href="#">All</a>
+<a class="dropdown-item" href="#">None</a>
+<div class="dropdown-divider"></div>
+<a class="dropdown-item" href="#">Read</a>
+<a class="dropdown-item" href="#">Unread</a>
+</div>
+</div> -->
+</div>
+<div class="float-left  form-focus" >
+<input type="text" placeholder="Chercher journaux" [(ngModel)]="text" class="form-control datetimepicker-input datetimepicker floating">
+<label class="focus-label mt-2">Chercher journaux</label>
+</div>
+</div>
+<div class="col-sm-3 col-md-4 col-4 top-action-right">
+<!-- <div class="text-right">
+<span class="text-muted d-none d-md-inline-block">Showing 10 of 112 </span>
+<button type="button" title="Refresh" data-toggle="tooltip" class="btn btn-white d-none d-md-inline-block"><i class="fas fa-sync-alt"></i></button>
+<div class="btn-group">
+<a class="btn btn-white"><i class="fas fa-angle-left"></i></a>
+<a class="btn btn-white"><i class="fas fa-angle-right"></i></a>
+</div>
+</div> -->
+</div>
+</div>
+</div>
+<div class="email-content">
+<div class="table-responsive">
+<table class="table table-inbox table-hover">
+<thead class="thead-light">
+<tr>
+<th colspan="6">
+<input type="checkbox" class="checkbox-all"
+[(ngModel)]="checkboxPrincipal" (change)="toggleSelection()" (click)="showbutton()" >
+<button *ngIf="showButton" (click)="deleteAll()"  href="javascript:void()" style="margin-left: 1070px;"
+      class="btn btn-danger btn-rounded">
+        <i class="fas fa-trash"></i></button>
+  <button *ngIf="showSecondButton" (click)="deleteJournauxByNum()"  href="javascript:void()" style="margin-left: 1070px;"
+      class="btn btn-danger btn-rounded">
+        <i class="fas fa-trash"></i></button>
+</th>
+</tr>
+</thead>
+<tbody *ngFor="let j of filteredItems">
+<tr *ngIf="j.libelle.toLowerCase().includes(text.toLowerCase())"
+class="unread clickable-row"  data-href="mail-view.html" >
+
+<td>
+<input  (click)="showSecondbutton(j.numJournaux)" [checked]="isJournauxSelected(j.numJournaux)" (change)="toggleJournauxSelection(j.numJournaux)"   type="checkbox" class="checkmail">
+</td>
+<!-- (ngModelChange)="toggleSelectone($event)" -->
+<td [routerLink]="['../journauxdetails',j.numJournaux]"><span class="mail-important"><i class="fas fa-star starred"></i></span></td>
+<td [routerLink]="['../journauxdetails',j.numJournaux]" class="name">{{j.libelle}}</td>
+<td [routerLink]="['../journauxdetails',j.numJournaux]" class="subject">{{j.rapport.substr(0,30)}} &nbsp; ....</td>
+<td [routerLink]="['../journauxdetails',j.numJournaux]"><i class="fas fa-paperclip"></i></td>
+<td [routerLink]="['../journauxdetails',j.numJournaux]" class="mail-date">{{j.dateCreation |date:'dd/MM/yyyy HH:mm'}}</td>
+</tr>
+<tr ></tr>
+</tbody>
+</table>
+<h6 class="text-muted text-center mt-4" *ngIf="filteredItems.length ==0">vous n'avez pas des journaux pour le moment ...</h6>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+
+<!-- <div class="container mt-4" style="margin-left: 450px;">
+
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="checkboxPrincipal"
+    [(ngModel)]="checkboxPrincipal" (change)="toggleCheckboxParent()">
+    <label class="form-check-label" for="checkboxPrincipal">
+      Checkbox principale
+    </label>
+  </div>
+
+  <div class="ml-4">
+    <div class="form-check" *ngFor="let checkboxEnfant of checkboxEnfants">
+      <input class="form-check-input" type="checkbox" [id]="checkboxEnfant.id" [(ngModel)]="checkboxEnfant.checked">
+      <label class="form-check-label" [for]="checkboxEnfant.id">
+        {{ checkboxEnfant.label }}
+      </label>
+    </div>
+  </div>
+</div> -->
+
+
+
+

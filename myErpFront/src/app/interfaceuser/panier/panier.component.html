@@ -1,0 +1,196 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+  <div class="page-header">
+  <div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <h5 class="text-uppercase mb-0 mt-0 page-title"> Panier</h5>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <ul class="breadcrumb float-right p-0 mb-0">
+  <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="fas fa-home"></i> Accueil</a></li>
+  <li class="breadcrumb-item"><a href="javascript:void()" >Panier</a></li>
+  <li class="breadcrumb-item"><span> Panier</span></li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-4 col-12">
+  </div>
+
+  </div>
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  rel="stylesheet">
+<div class="container" style="margin-left: 5px;">
+<div class="wrapper wrapper-content animated fadeInRight">
+
+  <div class="row">
+        <div class="col-md-9">
+          <div class="card" >
+            <div class="ibox">
+                <div class="ibox-title">
+                    <!-- <span class="pull-right">(<strong>{{paniers[0].lignepaniers.length}}</strong>) items</span> -->
+                    <h5>Items in your cart</h5>
+                </div>
+                <div class="ibox-content" >
+                    <div class="table-responsive">
+                        <table class="table shoping-cart-table" style="height: 200px;">
+                            <tbody *ngFor="let ligne of lignepaniers">
+
+                            <tr>
+
+
+                                <td width="90">
+
+                                    <div class="cart-product-imitation">
+                                      <img style="margin-bottom: 40px;" src="{{ligne.produit.image}}"  alt="" width="78" height="80">
+                                    </div>
+                                </td>
+
+                                <td class="desc">
+                                    <h3>
+                                    <a href="#" class="text-navy">
+                                        {{ligne.produit.nom}}
+                                    </a>
+                                    </h3>
+                                    <!-- class="small" -->
+                                    <!-- <p >
+                                        It is a long established fact that a reader will be distracted by the readable
+                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
+                                    </p> -->
+                                    <!-- class="small m-b-none" -->
+                                    <!-- <dl >
+                                        <dt>Description lists</dt>
+                                        <dd>A description list is perfect for defining terms.</dd>
+                                    </dl> -->
+
+                                    <div class="m-t-sm">
+
+                                        |
+                                        <a href="javascript:void(0)" (click)="delete(ligne.id)" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                    </div>
+                                </td>
+
+                                <td>
+                                   {{ligne.produit.prix}}DT
+                                    <s class="small text-muted">230DT</s>
+                                </td>
+                                <td width="60">
+
+                                  <div class="quantity-input">
+                                    <button class="btn btn-success" (click)="decrementerQuantite(ligne)" >-</button>
+                                    <input class="form-control"  type="text" [(ngModel)]="ligne.quantite" min="1">
+                                    <button class="btn btn-success" (click)="incrementerQuantite(ligne)" >+</button>
+                                  </div>
+                                  <!-- <input type="number" min="1" placeholder="1" [(ngModel)]="quantite" (ngModelChange)="calculTotal(ligne)"  class="form-control" > -->
+                                </td>
+                                <td>
+                                    <h4>
+                                      {{ligne.total}}DT
+                                    </h4>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p *ngIf="lignepaniers.length ==0" class="text-muted mt-2" style="margin-left: 300px;">votre panier est vide</p>
+                    </div>
+
+                </div>
+
+                <!-- <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table shoping-cart-table">
+
+                            <tbody>
+                            <tr>
+                                <td width="90">
+                                    <div class="cart-product-imitation">
+                                    </div>
+                                </td>
+                                <td class="desc">
+                                    <h3>
+                                        <a href="#" class="text-navy">
+                                            Photo editor
+                                        </a>
+                                    </h3>
+                                    <p class="small">
+                                        Page when looking at its layout. The point of using Lorem Ipsum is
+                                    </p>
+                                    <dl class="small m-b-none">
+                                        <dt>Description lists</dt>
+                                        <dd>A description list is perfect for defining terms.</dd>
+                                    </dl>
+                                    <div class="m-t-sm">
+                                        <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
+                                        |
+                                        <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    $700,00
+                                </td>
+                                <td width="65">
+                                    <input type="text" class="form-control" placeholder="1">
+                                </td>
+                                <td>
+                                    <h4>
+                                        $70,00
+                                    </h4>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
+                <div class="ibox-content">
+                    <button class="btn btn-success pull-right" routerLink="../commande"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
+                    <button class="btn btn-white" routerLink="../produits"><i class="fa fa-arrow-left" ></i> Continue shopping</button>
+
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3" style="margin-top: 2px; width: 80px;">
+            <div class="card">
+              <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Cart Summary</h5>
+                </div>
+                <div class="ibox-content">
+                    <span>
+                        Total
+                    </span>
+                    <h2 class="font-bold">
+                    {{total}} DT
+                    </h2>
+
+                    <hr>
+                    <span class="text-muted small">
+                    </span>
+                    <div class="m-t-sm">
+                        <div class="btn-group">
+                        <a href="#" class="btn btn-success btn-sm"
+                        routerLink="../commande"><i class="fa fa-shopping-cart"></i> Checkout</a>
+                        <a routerLink="../produits" class="btn btn-white btn-sm"> Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+

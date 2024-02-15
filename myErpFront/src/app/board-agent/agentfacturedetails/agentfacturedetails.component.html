@@ -1,0 +1,168 @@
+
+<div class="main-wrapper">
+  <div class="page-wrapper">
+  <div class="content container-fluid">
+  <div class="page-header">
+  <div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <h5 class="text-uppercase mb-0 mt-0 page-title">Facture Details</h5>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <ul class="breadcrumb float-right p-0 mb-0">
+  <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+  <li class="breadcrumb-item"><a href="index.html">Factures</a></li>
+  <li class="breadcrumb-item"><a href="index.html">Factures Utilisateurs</a></li>
+  <li class="breadcrumb-item"><span>Facture Details</span></li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  <div class="row" >
+  <div class="col-sm-5 col-4">
+  </div>
+  <div class="col-sm-7 col-8 text-right add-btn-col">
+  <div class="btn-group btn-group-sm">
+  <!-- <button class="btn btn-white"> <i class="fas fa-print fa-lg"></i>Download PDF</button> -->
+  <a href="javascript:void()">
+  <!-- <button class="btn btn-white" (click)="createPDF()">
+    <i style="color: rgb(255, 0, 0)" class="fas fa-file-pdf m-r-5"></i> Telecharger Pdf</button> -->
+    <button class="btn btn-outline-danger mr-2" (click)="createPDF()"><img src="assets/img/pdf.png" alt="" height="18">
+      <span class="ml-2">PDF</span></button>
+  </a>
+  </div>
+  </div>
+  </div>
+  <div class="row" id="content">
+  <div class="col-md-12">
+  <div class="card">
+  <div class="card-body">
+  <div class="row">
+  <div class="col-sm-6 m-b-20">
+    <img src="assets/img/logo1.png" width="70" height="70" alt="">
+    <span class="text-uppercase">suivie a distance</span>
+  <br><br>
+  <!-- <img src="assets/img/logo.png" class="inv-logo" alt=""> -->
+  <ul class="list-unstyled">
+    <!-- <li>3864 Quiet Valley Lane,</li>
+  <li>Sherman Oaks, CA, 91403</li> -->
+  </ul>
+  </div>
+  <div class="col-sm-6 m-b-20">
+  <div class="invoice-details">
+  <h5 class="text-uppercase text-muted">Facture #{{facture.numFacture}}</h5>
+  <ul class="list-unstyled">
+  <li>Date: <span>{{facture.dateFacture | date}}</span></li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-6 col-lg-9 m-b-20">
+  <h5 class="text-muted">Facture à:</h5>
+  <ul class="list-unstyled">
+  <li>
+  <h5><strong>{{facture.commande.panier.user.username}}</strong></h5>
+  <h6><strong>{{facture.commande.panier.user.email}}</strong></h6>
+  </li>
+  <!-- <li><span>Global Technologies</span></li>
+  <li>5754 Airport Rd</li>
+  <li>Monastir 5020</li>
+  <li>Tunisie</li>
+  <li>888-777-6655</li> -->
+  <!-- <li><a href="#"><span class="__cf_email__" -->
+    <!-- data-cfemail="3b595a494942584e5f5a7b5e435a564b575e15585456">[email&#160;protected]</span></a></li> -->
+  </ul>
+  </div>
+  <div class="col-sm-6 col-lg-3 m-b-20">
+  <span class="text-muted"> Details de paiement:</span>
+  <ul class="list-unstyled invoice-payment-details">
+  <li>
+  <h6>Montant Total: {{facture.commande.panier.total}} DT</h6>
+  </li>
+  <!-- <li>Pays: <span>Tunisie</span></li>
+  <li>Ville: <span>Monastir </span></li>
+  <li>Address: <span>Rue 5040</span></li> -->
+  </ul>
+  </div>
+  </div>
+  <div class="table-responsive">
+  <table class="table custom-table">
+  <thead class="thead-light">
+  <tr>
+    <th>Client</th>
+    <th>N° Commande</th>
+    <th>Date Commande</th>
+    <th>Achats</th>
+    <th>Total commande</th>
+    <th>Adresse de livraison</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{facture.commande.panier.user.username}}</td>
+    <td>{{facture.commande.id}}</td>
+    <td>{{facture.commande.date_creation |date}}</td>
+    <td >
+      <span *ngFor="let ligne of facture.commande.panier.lignepaniers">
+         {{ligne.quantite}}{{ligne.produit.nom}}
+      </span>
+    </td>
+    <td>{{facture.commande.panier.total}}</td>
+    <td>{{facture.commande.ville}}, {{facture.commande.adresse}}</td>
+  </tr>
+
+
+  </tbody>
+  </table>
+  </div>
+  <div>
+    <br>
+  <div class="row invoice-payment">
+  <div class="col-sm-7">
+  </div>
+  <div class="col-sm-5">
+  <div class="m-b-20 mt-2">
+  <h6>Montant Final</h6>
+  <div class="table-responsive no-border">
+  <table class="table m-b-0">
+  <tbody>
+  <tr>
+  <th >Adresse:</th>
+  <td class="text-right" >{{facture.commande.ville}}, {{facture.commande.adresse}}</td>
+  </tr>
+    <tr>
+  <th>Produits: <span  class="text-regular">
+
+  </span>
+
+  </th>
+  <td class="text-right" >
+    <span *ngFor="let ligne of facture.commande.panier.lignepaniers">
+
+      {{ligne.quantite}}{{ligne.produit.nom}}
+    </span>
+  </td>
+  </tr>
+  <tr>
+  <th>Total:</th>
+  <td class="text-right text-primary">
+  <h5>{{facture.commande.panier.total}} DT</h5>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  </div>
+

@@ -1,0 +1,86 @@
+
+<div class="main-wrapper">
+  <div class="page-wrapper">
+  <div class="content container-fluid">
+  <div class="page-header">
+  <div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <h5 class="text-uppercase mb-0 mt-0 page-title">Règlement</h5>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <ul class="breadcrumb float-right p-0 mb-0">
+  <li class="breadcrumb-item"><a href="javascript:void()"><i class="fas fa-home"></i> Accueil</a></li>
+  <li class="breadcrumb-item"><a href="javascript:void()">Règlement </a></li>
+  <li class="breadcrumb-item"><span>Règlement factures </span></li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  <div class="content-page">
+  <div class="row">
+  <div class="col-sm-5 col-4">
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+    <div class="table-responsive">
+    <table class="table custom-table mb-0">
+    <thead class="thead-light">
+    <tr>
+    <th>Num Facture</th>
+    <th>Titre</th>
+    <th>Date de creation</th>
+    <th>Total commande</th>
+    <th>Client</th>
+    <th class="text-right">Reglement facture</th>
+
+    <!-- <th class="text-right">Action</th> -->
+    </tr>
+    </thead>
+    <tbody *ngFor="let facture of factures">
+    <tr *ngIf="facture.commande.panier.user.username.toLowerCase().includes(searchbynum.toLowerCase())">
+    <td><a href="javascript:void(0)">{{facture.numFacture}}</a></td>
+    <td>{{facture.title}}</td>
+    <td>{{facture.dateFacture | date:'yyyy-MM-dd HH:mm'}}</td>
+    <td>{{facture.commande.panier.total}}DT</td>
+    <td>{{facture.commande.panier.user.username}}</td>
+    <td class="text-right">
+      <div class="dropdown">
+        <button  role="button"  style="width: 120px; margin-right: 13%;"
+         class="btn-sm btn-rounded dropdown-toggle"
+          [ngClass]="{
+          'btn btn-success': facture.reglement == 'PAYEE','btn btn-danger ': facture.reglement == 'NON_PAYEE'}"
+         data-toggle="dropdown" aria-expanded="false">{{facture.reglement}}</button>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="editReglement(facture,reg)" href="javascript:void(0)"
+         *ngFor="let reg of reglements">{{reg}}</a>
+
+        </div>
+        </div>
+    </td>
+
+
+    </tr>
+
+  </tbody>
+  <h6 *ngIf="factures.length == 0"  class="text-muted text-center mt-4" style="margin-left: 200px;">vous n'avez pas des règlements pour le moment ...</h6>
+    </table>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+  </div>
+  </div>
+  </div>
+
+  </div>
+
+
+
+
+

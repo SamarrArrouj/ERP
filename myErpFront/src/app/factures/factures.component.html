@@ -1,0 +1,249 @@
+
+<div class="main-wrapper">
+  <div class="page-wrapper">
+  <div class="content container-fluid">
+  <div class="page-header">
+  <div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <h5 class="text-uppercase mb-0 mt-0 page-title">Factures</h5>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <ul class="breadcrumb float-right p-0 mb-0">
+  <li class="breadcrumb-item"><a href="javascript:void()"><i class="fas fa-home"></i> Accueil</a></li>
+  <li class="breadcrumb-item"><a href="javascript:void()">Factures</a></li>
+  <li class="breadcrumb-item"><span>Factures Utilisateurs</span></li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  <div class="content-page">
+  <div class="row">
+  <div class="col-sm-5 col-4">
+  </div>
+  <div class="col-sm-7 col-8 text-right add-btn-col">
+  <a href="javascript:void()" (click)="openAdd()"  data-toggle="modal" data-target="#add"
+  class="btn btn-success btn-rounded">
+    <i class="fas fa-plus"></i> Ajouter Facture</a>
+  </div>
+  </div>
+  <div class="row filter-row">
+  <div class="col-sm-6 col-md-3">
+  <div class="form-group form-focus">
+  <input class="form-control datetimepicker-input floating datetimepicker"
+  type="date" [(ngModel)]="selectedDate"  data-toggle="datetimepicker"
+   >
+  <!-- <label class="focus-label">Num Facture</label> -->
+  </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+  <div class="form-group form-focus">
+  <input class="form-control datetimepicker-input datetimepicker floating" [(ngModel)]="searchbyuser"
+   type="text" data-toggle="datetimepicker">
+  <label class="focus-label">Client</label>
+  </div>
+  </div>
+
+  <div class="col-sm-6 col-md-3">
+  <a href="javascript:void(0)" (click)="filterByDate()" class="btn btn-search rounded btn-block mb-3">
+     Search </a>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-md-12">
+  <div class="table-responsive">
+  <table class="table custom-table mb-0">
+  <thead class="thead-light">
+  <tr>
+  <th>Num Facture</th>
+  <th>Titre</th>
+  <th>Date de creation</th>
+  <th>commande</th>
+  <th>Total commande</th>
+  <th>Client</th>
+  <th class="text-right">Action</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let facture of factures">
+  <tr *ngIf="facture.commande.panier.user.username.toLowerCase().includes(searchbyuser.toLowerCase())">
+  <td><a href="javascript:void(0)">{{facture.numFacture}}</a></td>
+  <td>{{facture.title}}</td>
+  <td>{{facture.dateFacture | date:'yyyy-MM-dd HH:mm'}}</td>
+  <td>
+    <ul *ngFor="let prod of facture.commande.panier.lignepaniers">
+  <li>  {{prod.quantite}} {{prod.produit.nom}} : {{prod.produit.prix}}DT</li>
+  </ul>
+  </td>
+  <td>{{facture.commande.panier.total}}DT</td>
+  <td>{{facture.commande.panier.user.username}}</td>
+  <!-- <td>{{facture.user.username}}</td> -->
+  <td class="text-right">
+  <div class="dropdown dropdown-action">
+  <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    <i class="fas fa-ellipsis-v"></i></a>
+  <div class="dropdown-menu dropdown-menu-right">
+  <!-- <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['../updatefacture',facture.numero_facture]"><i class="fas fa-pencil-alt m-r-5">
+  </i> Edit</a> -->
+  <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['../facture',facture.numFacture]">
+    <i class="fas fa-eye m-r-5"></i> Details
+  </a>
+  <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#add"
+  (click)="openEdit(facture)" ><i class="fas fa-eye m-r-5">
+  </i> Modifier</a>
+  <!-- <a class="dropdown-item" href="#"><i class="fas fa-file-pdf m-r-5"></i> Download</a> -->
+  <a class="dropdown-item" (click)="deleteFacture(facture.numFacture)" href="javascript:void(0)">
+    <i class="fas fa-trash-alt m-r-5"></i> supprimer</a>
+  </div>
+  </div>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  </div>
+
+  <div class="modal fade" id="add" *ngIf="show"
+role="dialog" >
+ <div class="modal-dialog modal-dialog-centered"  >
+   <div class="modal-content modal-md">
+     <!-- <div class="modal-header"*ngIf="dialogDetails">
+       <h5  class="modal-title" id="exampleModalLabel">Details</h5> </div> -->
+
+       <div class="modal-header" *ngIf="dialogAdd">
+       <h5  class="modal-title" id="exampleModalLabel">Ajouter facture</h5> </div>
+
+       <div class="modal-header"*ngIf="dialogEdit">
+       <h5  class="modal-title" id="exampleModalLabel">Modifier facture</h5> </div>
+
+
+     <div class="modal-body" >
+
+
+       <!-- dialog Edit -->
+
+        <div  *ngIf="dialogEdit" class="card">
+        <div class="card-body">
+        <div>
+          <div class="row mt-3" >
+            <div  style="margin-left: 70px;">
+            <div class="custom-mt-form">
+            <div class="form-group">
+            <label>Titre</label>
+            <input type="text" class="form-control" style="width: 300px;"  name="userName"
+             [(ngModel)]="factureEdit.title" required>
+
+            </div>
+            </div>
+            </div>
+            </div>
+            <div style="margin-left: 58px;">
+              <div class="custom-mt-form">
+                <div class="form-group">
+                  <label>Date facture</label>
+                  <input type="date" class="form-control" style="width: 300px;" name="userNumero"
+                  [(ngModel)]="factureEdit.dateFacture" required>
+
+                  </div>
+                  <div class="form-group"  style="width: 300px;">
+                    <label for="email">Choisir Commande</label>
+                    <div>
+                      <select  class="custom-select" id="inputGroupSelect03"  [(ngModel)]="factureEdit.commande"
+                      aria-label="Example select with button addon" >
+                      <option ></option>
+                      <option *ngFor="let commande of commandes" [ngValue]="commande">
+                        {{commande.panier.user.username}}--{{commande.date_creation |date:'dd/MM/yyyy HH:mm'}}--{{commande.panier.total}}DT
+                      </select>
+                    </div>
+
+                  </div>
+              </div>
+
+              </div>
+            </div><br>
+            <div style="margin-left: 240px;">
+              <button class="btn btn-success mr-2" style="color:white" (click)="editfacture()" data-dismiss="modal"  type="submit">Modifier</button>
+              <a  class="btn btn-danger" style="color:white" data-dismiss="modal"   (click)="close()">Close</a>
+            </div>
+       </div>
+       </div>
+        <!-- dialog Edit -->
+       <!-- dialog add -->
+       <div  *ngIf="dialogAdd" class="card">
+        <div class="card-body">
+        <div>
+          <div class="row mt-3" >
+            <div  style="margin-left: 70px;">
+            <div class="custom-mt-form">
+            <div class="form-group">
+            <label>Titre</label>
+            <input type="text" name="title" class="form-control" placeholder="Entrer le titre"
+            style="width: 300px;"
+             [(ngModel)]="factureAdd.title" required>
+
+            </div>
+            </div>
+            </div>
+            </div>
+            <div style="margin-left: 58px;">
+
+
+            <!-- <div class="form-group text-right custom-mt-form-group">
+              <button class="btn btn-success mr-2" type="submit">Modifier</button>
+              </div> -->
+
+            </div>
+            <div style="margin-left: 58px;">
+              <div class="custom-mt-form">
+                  <div class="form-group" style="width: 300px;">
+                    <label for="email">Choisir commande</label>
+                    <div>
+                      <select  class="custom-select" id="inputGroupSelect03" name="commande"
+                      aria-label="Example select with button addon" [(ngModel)]="factureAdd.commande"  required>
+                        <option ></option>
+                        <option *ngFor="let commande of commandes" [ngValue]="commande">
+                          {{commande.panier.user.username}}--{{commande.date_creation |date:'dd/MM/yyyy HH:mm'}}--{{commande.panier.total}}DT
+
+                        </option>
+                      </select>
+                    </div>
+
+                  </div>
+
+              <!-- <div class="form-group text-right custom-mt-form-group">
+                <button class="btn btn-success mr-2" type="submit">Modifier</button>
+                </div> -->
+
+              </div>
+              </div>
+            </div><br>
+            <div style="margin-left: 250px;">
+              <button class="btn btn-success mr-2" (click)="savefacture()" data-dismiss="modal"  type="submit">Enregistrer</button>
+              <a  class="btn btn-danger"  data-dismiss="modal" style="color: white;"   (click)="close()" >Close</a>
+            </div>
+       </div>
+       </div>
+        <!-- dialog add -->
+
+
+
+       <!-- <p>Êtes vous sûr de vouloir supprimer ceci?</p>
+ <div class="m-t-20">
+   <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+  <button type="submit" class="btn btn-danger"
+   >Delete</button>
+  </div> -->
+     </div>
+
+
+
+   </div>
+ </div>
+</div>
+
+
+

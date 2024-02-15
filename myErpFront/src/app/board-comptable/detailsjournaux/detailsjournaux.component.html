@@ -1,0 +1,52 @@
+
+
+<div class="main-wrapper">
+<div class="page-wrapper">
+<div class="content container-fluid">
+<div class="page-header">
+<div class="row">
+<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+<h5 class="text-uppercase mb-0 mt-0 page-title">Journaux details</h5>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+<ul class="breadcrumb float-right p-0 mb-0">
+<li class="breadcrumb-item"><a href="javascript:void()"><i class="fas fa-home"></i> Accueil</a></li>
+<li class="breadcrumb-item"><a href="javascript:void()">Journaux </a></li>
+<li class="breadcrumb-item"><span> Journaux details</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+  <div class=" mt-sm-0 mt-2 text-right">
+    <button (click)="downloadAsText()" class="btn btn-outline-info mr-2"><img src="assets/img/texte.jpg" height="20px" width="18px" alt=""><span class="ml-2">Text</span></button>
+    <button (click)="createPDF()" class="btn btn-outline-danger mr-2">
+      <img src="assets/img/pdf.png" alt="" height="18"><span class="ml-2">PDF</span></button>
+    <!-- <button class="btn btn-light" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button> -->
+    </div>
+  <br>
+<div class="blog-view" id="content">
+<article class="blog blog-single-post" id="element">
+<h3 class="blog-title text-center">{{journaux.libelle}}</h3>
+<div class="blog-info clearfix">
+<div class="post-left">
+<ul>
+<li><a href="#"><i class="far fa-calendar-alt" aria-hidden="true"></i> <span>{{journaux.dateCreation |date}}</span></a></li>
+</ul>
+</div>
+</div> <br>
+<div class="blog-content">
+  <p>{{journaux.rapport}}</p>
+</div>
+</article>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+

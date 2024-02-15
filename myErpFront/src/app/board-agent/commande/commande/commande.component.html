@@ -1,0 +1,220 @@
+<div class="page-wrapper">
+  <div class="content container-fluid">
+  <div class="page-header">
+  <div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <h5 class="text-uppercase mb-0 mt-0 page-title"> Liste des commandes</h5>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <ul class="breadcrumb float-right p-0 mb-0">
+  <li class="breadcrumb-item"><a href="javascript:void(0)" ><i class="fas fa-home"></i> Accueil</a></li>
+  <li class="breadcrumb-item"><a href="javascript:void()" routerLink="../commandes">Commandes</a></li>
+  <li class="breadcrumb-item"><span> Commandes</span></li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-4 col-12">
+  </div>
+  </div>
+  <div class="content-page">
+  <div class="row filter-row">
+  <div class="col-sm-6 col-md-3">
+  <div class="form-group form-focus">
+  <input type="text" class="form-control floating" [(ngModel)]="searchbyclient" >
+  <label class="focus-label">Client</label>
+  </div>
+  </div>
+  <!-- <div class="col-sm-6 col-md-3">
+  <div class="form-group form-focus">
+  <input type="text" class="form-control floating" >
+  <label class="focus-label">Email</label>
+  </div>
+  </div> -->
+  <div class="col-sm-6 col-md-3">
+  <a href="javascript:void(0)" class="btn btn-search rounded btn-block mb-3" (click)="search()" > search </a>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-lg-12 mb-3">
+  <div class="table-responsive">
+  <table class="table custom-table datatable">
+  <thead class="thead-light">
+  <tr>
+  <!-- <th>Name </th> -->
+  <th>Date de creation</th>
+  <th>Client</th>
+  <th>Adresse</th>
+  <th>Numero</th>
+  <th>Total commande</th>
+  <th>Achats</th>
+  <th class="text-right">Action</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let commande of commandes">
+  <tr *ngIf="commande.panier.user.username.toLowerCase().includes(searchbyclient.toLowerCase())">
+  <td>{{commande.date_creation | date:'dd/MM/yyyy HH:mm'}}</td>
+  <td>{{commande.panier.user.username}}</td>
+  <td>{{commande.ville}}, {{commande.adresse}}</td>
+  <td>{{commande.numero}}</td>
+  <td>{{commande.panier.total}} DT</td>
+  <td >
+   <ul *ngFor="let prod of commande.panier.lignepaniers">
+   <p>
+     {{prod.quantite}} {{prod.produit.nom}}
+    </p>
+   </ul>
+  </td>
+
+  <td class="text-right">
+    <!-- <button type="submit" data-toggle="modal" data-target="#details"
+    class="btn btn-success btn-sm mb-1 mr-1"  (click)="geteditUser(user)">
+  <a href="javascript:void()"
+    >
+  <i class="fas fa-edit" style="color:white;"></i>
+  </a>
+</button> -->
+<button type="submit" data-toggle="modal" data-target="#details"
+class="btn btn-success btn-sm mb-1" (click)="getCommande(commande.id)" >
+
+<i class="fas fa-info-circle" ></i>
+</button>
+  <button type="submit"  (click)="deleteCommande(commande.id)"
+  class="btn btn-danger btn-sm mb-1 ml-1" >
+  <i class="fas fa-trash" ></i>
+  </button>
+
+
+  </td>
+
+  </tr>
+  <div class="modal fade" id="details"
+         role="dialog" >
+ <div class="modal-dialog modal-dialog-centered" >
+   <div class="modal-content modal-md">
+     <div class="modal-header">
+       <h5  class="modal-title" id="exampleModalLabel">Details</h5>
+
+     </div>
+
+
+     <div class="modal-body">
+      <div >
+        <div >
+        <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="profile-img">
+            <a href="javascript:void()" class="avatar">{{commande.panier.user.username.substr(0,1)}}</a>
+            </div>
+        <div class="aboutprofile-name">
+        <h5 class="text-center mt-2">{{commande.panier.user.username}}</h5>
+
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Date de création</b><a href="javascript:void(0)" class="float-right">{{commande.date_creation |date}}</a></li><br>
+        <li class="list-group-item"><b>Achat</b>
+          <a href="javascript:void(0)"
+          *ngFor="let ligne of commande.panier.lignepaniers" class="float-right">
+            {{ligne.quantite}}&nbsp;{{ligne.produit.nom}}
+          </a>
+          </li><br>
+        <li class="list-group-item"><b>Total commande</b>
+          <a href="javascript:void(0)" class="float-right">{{commande.panier.total}}</a></li><br>
+           <li class="list-group-item"><b>Adresse</b><a href="javascript:void(0)" class="float-right">{{commande.adresse}}</a></li><br>
+            <li class="list-group-item"><b>Numero</b><a href="javascript:void(0)" class="float-right">{{commande.numero}}</a></li><br>
+        </ul>
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+    <button class="btn btn-danger text-right" style="color:white; margin-left: 400px;" data-dismiss="modal" >Close</button>
+     </div>
+
+
+
+   </div>
+ </div>
+</div>
+</tbody>
+</table>
+
+
+<!-- <p>Êtes vous sûr de vouloir supprimer ceci?</p>
+<div class="m-t-20">
+<a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+<button type="submit" class="btn btn-danger"
+>Delete</button>
+</div> -->
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- <div class="modal fade" id="edit"
+role="dialog" >
+ <div class="modal-dialog modal-dialog-centered" >
+   <div class="modal-content modal-md">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Modifier utilisateur</h5>
+
+     </div>
+
+
+     <div class="modal-body">
+      <div >
+        <div >
+          <div class="row" >
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12" style="margin-left: 150px;">
+            <div class="custom-mt-form">
+            <div class="form-group">
+            <label>Nom d'utilisateur</label>
+            <input type="text" class="form-control"  name="userName"
+             [(ngModel)]="_user.username" required>
+
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12" style="margin-left: 150px;">
+            <div class="custom-mt-form">
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="userNumero"
+                [(ngModel)]="_user.email" required>
+
+                </div>
+            <div>
+              &nbsp;
+            </div>
+            <div class="form-group text-right custom-mt-form-group">
+              <button class="btn btn-success mr-2" type="submit">Modifier</button>
+              </div>
+
+            </div>
+            </div>
+            </div>
+        </div>
+        <a href="#" class="btn btn-success" style="margin-left: 450px;" data-dismiss="modal">Close</a>
+        </div>
+      </div>
+
+  </div>
+
+
+
+
+</div> -->
+<!-- <div class="text-muted" *ngIf="showusername" > -->
+            <!-- <div>le nom d'utilisateur est obligatoire</div> -->
+ <!-- <div class="text-muted" *ngIf="shownumero" >
+                  <div>le numero est obligatoire</div>
+                  </div> -->
+                  <!-- <button class="btn btn-secondary" routerLink="../../users" type="reset">Cancel</button> -->

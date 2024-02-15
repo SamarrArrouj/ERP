@@ -1,0 +1,92 @@
+
+<div class="main-wrapper">
+  <div class="page-wrapper">
+  <div class="content container-fluid">
+  <div class="page-header">
+  <div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <h5 class="text-uppercase mb-0 mt-0 page-title">Dépenses</h5>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+  <ul class="breadcrumb float-right p-0 mb-0">
+  <li class="breadcrumb-item"><a href="javascript:void()"><i class="fas fa-home"></i> Accueil</a></li>
+  <li class="breadcrumb-item"><a href="javascript:void()">Dépenses </a></li>
+  <li class="breadcrumb-item"><span>Dépenses achats </span></li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  <div class="content-page">
+  <div class="row">
+  <div class="col-sm-5 col-4">
+  </div>
+  </div>
+  <div class="row invoice-payment">
+    <div class="col-sm-7">
+    </div>
+    <div class="col-sm-5">
+    <div class="m-b-20 mt-2">
+    <!-- <h6>Montant Final</h6> -->
+    <div class="table-responsive no-border">
+    <table class="table m-b-0">
+    <tbody >
+    <tr *ngIf="somme !=0" >
+    <th >Total :</th>
+    <td class="text-right text-primary">
+    <h5>{{somme}}DT</h5>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+  <div class="row">
+
+    <div class="col-md-12">
+    <div class="table-responsive">
+    <table class="table custom-table mb-0">
+    <thead class="thead-light">
+    <tr>
+    <th>Facture date</th>
+    <th>Employee</th>
+    <th>Total</th>
+
+
+
+    <!-- <th class="text-right">Action</th> -->
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let facture of factures" >
+      <!-- <td>
+   <h2><a href="profile.html" class="avatar text-white"><img [src]="ob.produit.image"></a>
+    <a href="profile.html">{{ob.produit.nom}} <span> </span></a></h2>
+       </td> -->
+    <td>{{facture.dateFacture}}</td>
+    <td>{{facture.commande.panier.user.username}}</td>
+    <td>{{facture.commande.panier.total}}</td>
+    </tr>
+    <h6 *ngIf="somme == 0" class="text-muted text-center mt-4" style="margin-left: 150px;">vous n'avez pas des dépenses pour le moment ...</h6>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+  </div>
+  </div>
+  </div>
+
+  </div>
+
+
+
+
+
